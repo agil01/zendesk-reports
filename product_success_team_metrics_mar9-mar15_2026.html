@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Success Team Metrics | Mar 9 - Mar 15, 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @page {
+            margin: 1in;
+            size: letter;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: white;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+        }
+
+        .cover-page {
+            text-align: center;
+            padding: 3in 0 2in;
+            page-break-after: always;
+            border-bottom: 3px solid #06b6d4;
+        }
+
+        .cover-page h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .cover-page h2 {
+            font-size: 1.75rem;
+            margin-bottom: 3rem;
+            color: #4a5568;
+            font-weight: normal;
+        }
+
+        .cover-page .metadata {
+            font-size: 1.05rem;
+            color: #718096;
+            line-height: 2.2;
+        }
+
+        .cover-page .metadata p {
+            margin: 0.5rem 0;
+        }
+
+        .cover-page .classification {
+            margin-top: 3rem;
+            padding: 1rem 2rem;
+            background: #e0f2fe;
+            border: 2px solid #0891b2;
+            color: #164e63;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .toc {
+            page-break-after: always;
+            padding: 2rem 0;
+        }
+
+        .toc h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #1a202c;
+            border-bottom: 2px solid #06b6d4;
+            padding-bottom: 0.75rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 1.05rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .toc a:hover {
+            color: #06b6d4;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 2.5rem 0 1.5rem;
+            color: #1a202c;
+            border-bottom: 3px solid #06b6d4;
+            padding-bottom: 0.75rem;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: #2d3748;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: #4a5568;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .executive-summary {
+            background: #f0f9ff;
+            padding: 1.75rem;
+            margin: 2rem 0;
+            border-left: 5px solid #06b6d4;
+            page-break-inside: avoid;
+        }
+
+        .executive-summary p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .alert-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 4px;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            page-break-inside: avoid;
+        }
+
+        .alert-box strong {
+            color: #92400e;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin: 2rem 0;
+            page-break-inside: avoid;
+        }
+
+        .metric-box {
+            border: 2px solid #e2e8f0;
+            padding: 1.5rem;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-box:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
+        }
+
+        .metric-box .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #06b6d4;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-box .label {
+            font-size: 0.875rem;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .metric-box .status {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-good { background: #d1fae5; color: #065f46; }
+        .status-warning { background: #fef3c7; color: #92400e; }
+        .status-info { background: #dbeafe; color: #1e40af; }
+
+        .chart-section {
+            margin: 2.5rem 0;
+            page-break-inside: avoid;
+        }
+
+        .chart-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .chart-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .chart-canvas {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-description {
+            padding: 1.25rem;
+            background: white;
+            border-left: 4px solid #06b6d4;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #4a5568;
+        }
+
+        .chart-description strong {
+            color: #1a202c;
+            font-weight: 600;
+        }
+
+        .chart-highlight {
+            background: #e0f2fe;
+            padding: 2px 8px;
+            border-radius: 3px;
+            color: #0c4a6e;
+            font-weight: 600;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .insight-card {
+            background: #fffbeb;
+            border: 2px solid #fbbf24;
+            border-radius: 6px;
+            padding: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .insight-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f59e0b;
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-content {
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .insight-tag {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            background: #fbbf24;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .recommendation-section {
+            background: #f0f9ff;
+            border: 2px solid #0891b2;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            page-break-inside: avoid;
+        }
+
+        .recommendation-category {
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0c4a6e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-badge {
+            padding: 0.4rem 1rem;
+            background: #06b6d4;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .recommendation-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .recommendation-list li {
+            padding: 1rem 1rem 1rem 2.5rem;
+            position: relative;
+            border-bottom: 1px solid #e0f2fe;
+            color: #334155;
+            line-height: 1.7;
+        }
+
+        .recommendation-list li:last-child {
+            border-bottom: none;
+        }
+
+        .recommendation-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0.75rem;
+            color: #06b6d4;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            page-break-inside: avoid;
+        }
+
+        thead {
+            background: #f0f9ff;
+            border-bottom: 2px solid #06b6d4;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 0.75rem;
+            font-weight: 600;
+            border: 1px solid #cbd5e0;
+            color: #1a202c;
+        }
+
+        td {
+            padding: 0.85rem 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.65rem;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .footer-note {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e2e8f0;
+            font-size: 0.875rem;
+            color: #718096;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .metric-grid {
+                page-break-inside: avoid;
+            }
+
+            .chart-container {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: #2d3748;
+                text-decoration: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <h1>Product Success Team Metrics</h1>
+        <h2>Zendesk Support Ticket Analysis</h2>
+        <div class="metadata">
+            <p><strong>Report Period:</strong> March 9 - March 15, 2026</p>
+            <p><strong>Report Date:</strong> March 15, 2026</p>
+            <p><strong>Prepared By:</strong> Anthony Gil</p>
+            <p><strong>Department:</strong> Product Success</p>
+        </div>
+        <div class="classification">
+            INTERNAL USE - BUSINESS CONFIDENTIAL
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h1>Table of Contents</h1>
+        <ul>
+            <li><a href="#executive-summary"><span>1. Management Summary</span></a></li>
+            <li><a href="#key-metrics"><span>2. Key Performance Metrics</span></a></li>
+            <li><a href="#data-analysis"><span>3. Data Analysis & Visualizations</span></a></li>
+            <li><a href="#insights"><span>4. Key Insights & Trends</span></a></li>
+            <li><a href="#recommendations"><span>5. Strategic Recommendations</span></a></li>
+            <li><a href="#appendix"><span>6. Appendix: Methodology & Data Sources</span></a></li>
+        </ul>
+    </div>
+
+    <!-- Management Summary -->
+    <section id="executive-summary">
+        <h1>1. Management Summary</h1>
+
+        <div class="executive-summary">
+            <p>This report provides a comprehensive analysis of <strong>72 Zendesk support tickets</strong> received during the 7-day period from March 9 through March 15, 2026. The analysis reveals concerning backlog accumulation with only a 58.3% resolution rate for assigned tickets, significant workload imbalance, and critical performance gaps requiring immediate intervention.</p>
+        </div>
+
+        <div class="alert-box">
+            <p><strong>⚠️ CRITICAL FINDING:</strong> Ron Pineda's 88% open ticket rate (22 of 25 tickets) represents a severe backlog crisis with multiple tickets dating back to July-August 2025. This performance gap is compounded by handling 40% of all urgent tickets (10 of 25 tickets), creating an unsustainable workload that requires immediate managerial intervention and resource reallocation.</p>
+        </div>
+
+        <h2>Key Takeaways</h2>
+        <ul>
+            <li><strong>Volume Performance:</strong> 72 total tickets (65 assigned + 7 unassigned) with 58.3% resolution rate (38 of 65 assigned tickets resolved)</li>
+            <li><strong>Critical Backlog Crisis:</strong> 43 open tickets across team with Ron Pineda accounting for 22 (51% of all open tickets)</li>
+            <li><strong>Performance Disparity:</strong> Candice Brown leads with 45% open rate, while Ron Pineda's 88% open rate is nearly double the team average of 66%</li>
+            <li><strong>Workload Imbalance:</strong> Ron handles 34.7% of volume (25 tickets) including 40% of all urgent tickets (10 urgent), compared to 27.8% each for Bola and Candice (20 tickets each)</li>
+            <li><strong>Primary Issue Categories:</strong> User management (UMAC) 33.8%, Terminations 23.1%, EHR/Athena 21.5%, Application Issues 12.3%</li>
+            <li><strong>Historical Backlog:</strong> Multiple tickets dating back 6-8 months indicate systemic closure issues requiring process intervention</li>
+        </ul>
+
+        <h2>Bottom Line</h2>
+        <p>The Product Success team faces a <strong>critical performance crisis</strong> driven by severe backlog accumulation and workload imbalance. Ron Pineda's 88% open rate with 22 unclosed tickets (including very old tickets from July-August 2025) requires <strong>immediate managerial intervention</strong>. The team needs urgent process improvements, workload rebalancing, and potential additional resources to address the 43-ticket backlog and prevent further deterioration of service quality.</p>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Key Metrics -->
+    <section id="key-metrics">
+        <h1>2. Key Performance Metrics</h1>
+
+        <h2>Summary Statistics</h2>
+        <div class="metric-grid">
+            <div class="metric-box">
+                <span class="value">72</span>
+                <div class="label">Total Tickets</div>
+                <span class="status status-info">7-Day Period</span>
+            </div>
+            <div class="metric-box">
+                <span class="value">58.3%</span>
+                <div class="label">Resolution Rate</div>
+                <span class="status status-warning">Below Target</span>
+            </div>
+            <div class="metric-box">
+                <span class="value">43</span>
+                <div class="label">Open Tickets</div>
+                <span class="status status-warning">Critical Backlog</span>
+            </div>
+            <div class="metric-box">
+                <span class="value">66%</span>
+                <div class="label">Avg Open Rate</div>
+                <span class="status status-warning">Action Required</span>
+            </div>
+        </div>
+
+        <h2>Agent Performance Comparison</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>Total Tickets</th>
+                    <th>Resolved</th>
+                    <th>Open Tickets</th>
+                    <th>Open Rate</th>
+                    <th>Performance Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #d1fae5;">
+                    <td><strong>Candice Brown</strong></td>
+                    <td>20 (27.8%)</td>
+                    <td>11</td>
+                    <td>9</td>
+                    <td>45%</td>
+                    <td style="color: #065f46; font-weight: 600;">✓ Best Performance</td>
+                </tr>
+                <tr style="background: #fef3c7;">
+                    <td><strong>Bola Kuye</strong></td>
+                    <td>20 (27.8%)</td>
+                    <td>8</td>
+                    <td>12</td>
+                    <td>60%</td>
+                    <td style="color: #92400e; font-weight: 600;">⚠ Needs Improvement</td>
+                </tr>
+                <tr style="background: #fee2e2;">
+                    <td><strong>Ron Pineda</strong></td>
+                    <td>25 (34.7%)</td>
+                    <td>3</td>
+                    <td>22</td>
+                    <td>88%</td>
+                    <td style="color: #991b1b; font-weight: 600;">🚨 CRITICAL</td>
+                </tr>
+                <tr style="background: #f0f9ff;">
+                    <td><strong>Team Total</strong></td>
+                    <td>65 (90.3%)</td>
+                    <td>38</td>
+                    <td>43</td>
+                    <td>66%</td>
+                    <td>Action Required</td>
+                </tr>
+                <tr>
+                    <td><strong>Unassigned</strong></td>
+                    <td>7 (9.7%)</td>
+                    <td>—</td>
+                    <td>7</td>
+                    <td>—</td>
+                    <td>Requires Triage</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>SLA Notifications by Agent (Mar 9-15, 2026)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent</th>
+                    <th>1st Normal SLA</th>
+                    <th>1st Urgent SLA</th>
+                    <th>2nd Urgent SLA</th>
+                    <th>3rd Urgent SLA</th>
+                    <th>Total Notifications</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #d1fae5;">
+                    <td><strong>Candice Brown</strong></td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td style="font-weight: 600;">1</td>
+                    <td style="color: #065f46; font-weight: 600;">✓ Excellent</td>
+                </tr>
+                <tr style="background: #fef3c7;">
+                    <td><strong>Bola Kuye</strong></td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td style="font-weight: 600;">3</td>
+                    <td style="color: #92400e; font-weight: 600;">⚠ Moderate</td>
+                </tr>
+                <tr style="background: #fee2e2;">
+                    <td><strong>Ron Pineda</strong></td>
+                    <td>1</td>
+                    <td style="color: #991b1b; font-weight: 600;">10</td>
+                    <td style="color: #991b1b; font-weight: 600;">2</td>
+                    <td>0</td>
+                    <td style="color: #991b1b; font-weight: 600;">13</td>
+                    <td style="color: #991b1b; font-weight: 600;">🚨 CRITICAL</td>
+                </tr>
+                <tr style="background: #f0f9ff; font-weight: 600;">
+                    <td><strong>Team Total</strong></td>
+                    <td>3</td>
+                    <td>12</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>17</td>
+                    <td>High Alert Volume</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #4a5568; line-height: 1.7;">
+            <strong>SLA Notification Analysis:</strong> Data sourced from #zendesk-sla-notifications Slack channel. Total of <strong>17 SLA notifications</strong> triggered during the reporting period, with Ron Pineda accounting for <strong>76.5% (13 of 17)</strong> of all notifications. The presence of 2 tickets escalating to <strong>2nd urgent warnings</strong> (both Ron's: tickets 4276, 4260) indicates systematic SLA management issues requiring immediate intervention. Candice Brown's single notification represents best-in-team proactive management.
+            <br><br>
+            <strong>Notification Definitions:</strong>
+            • 1st Normal SLA = 17 hours remaining (48-hour SLA)
+            • 1st Urgent SLA = 5 hours remaining (8-hour SLA)
+            • 2nd Urgent SLA = 3 hours remaining (critical escalation)
+            • 3rd Urgent SLA = Final warning before breach
+        </p>
+
+        <h2>Distribution Metrics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Breakdown</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="4"><strong>Status</strong></td>
+                    <td>Solved</td>
+                    <td>24</td>
+                    <td>36.9%</td>
+                </tr>
+                <tr>
+                    <td>Closed</td>
+                    <td>18</td>
+                    <td>27.7%</td>
+                </tr>
+                <tr>
+                    <td>Pending</td>
+                    <td>15</td>
+                    <td>23.1%</td>
+                </tr>
+                <tr>
+                    <td>Hold</td>
+                    <td>8</td>
+                    <td>12.3%</td>
+                </tr>
+                <tr>
+                    <td rowspan="4"><strong>Priority</strong></td>
+                    <td>Normal</td>
+                    <td>36</td>
+                    <td>55.4%</td>
+                </tr>
+                <tr>
+                    <td>Urgent</td>
+                    <td>16</td>
+                    <td>24.6%</td>
+                </tr>
+                <tr>
+                    <td>Low</td>
+                    <td>9</td>
+                    <td>13.8%</td>
+                </tr>
+                <tr>
+                    <td>High</td>
+                    <td>4</td>
+                    <td>6.2%</td>
+                </tr>
+                <tr>
+                    <td rowspan="4"><strong>Agent</strong></td>
+                    <td>Ron Pineda</td>
+                    <td>25</td>
+                    <td>34.7%</td>
+                </tr>
+                <tr>
+                    <td>Bola Kuye</td>
+                    <td>20</td>
+                    <td>27.8%</td>
+                </tr>
+                <tr>
+                    <td>Candice Brown</td>
+                    <td>20</td>
+                    <td>27.8%</td>
+                </tr>
+                <tr>
+                    <td>Unassigned</td>
+                    <td>7</td>
+                    <td>9.7%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Issue Category Distribution</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue Category</th>
+                    <th>Ticket Count</th>
+                    <th>Percentage</th>
+                    <th>Top Agent</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>User Management (UMAC)</strong></td>
+                    <td>22</td>
+                    <td>33.8%</td>
+                    <td>Ron Pineda (9 tickets)</td>
+                </tr>
+                <tr>
+                    <td><strong>Terminations</strong></td>
+                    <td>15</td>
+                    <td>23.1%</td>
+                    <td>Bola/Candice (5 each)</td>
+                </tr>
+                <tr>
+                    <td><strong>EHR/Athena Issues</strong></td>
+                    <td>14</td>
+                    <td>21.5%</td>
+                    <td>Ron Pineda (6 tickets)</td>
+                </tr>
+                <tr>
+                    <td><strong>Application Issues</strong></td>
+                    <td>8</td>
+                    <td>12.3%</td>
+                    <td>Ron/Bola (3 each)</td>
+                </tr>
+                <tr>
+                    <td><strong>Other/Miscellaneous</strong></td>
+                    <td>6</td>
+                    <td>9.2%</td>
+                    <td>Even distribution</td>
+                </tr>
+                <tr style="background: #f0f9ff; font-weight: 600;">
+                    <td><strong>Total (Assigned)</strong></td>
+                    <td>65</td>
+                    <td>100%</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Data Analysis -->
+    <section id="data-analysis">
+        <h1>3. Data Analysis & Visualizations</h1>
+
+        <div class="chart-section">
+            <h2>Status Distribution Analysis</h2>
+            <div class="chart-container">
+                <div class="chart-title">Ticket Status Breakdown</div>
+                <div class="chart-canvas">
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    <strong>Only 58.3% of assigned tickets</strong> achieved resolved status (36.9% solved + 27.7% closed), indicating significant backlog challenges. With <span class="chart-highlight">35.4% of tickets in pending or hold status</span> (23.1% pending + 12.3% hold), the team faces substantial open ticket accumulation requiring process intervention. This resolution rate is <strong>well below industry benchmarks</strong> of 75-85% and signals critical operational issues.
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>Priority Distribution Analysis</h2>
+            <div class="chart-container">
+                <div class="chart-title">Ticket Priority Breakdown</div>
+                <div class="chart-canvas">
+                    <canvas id="priorityChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    The majority (<span class="chart-highlight">55.4%</span>) of tickets are normal priority (36 tickets), with a concerning <strong>24.6% urgent classification</strong> (16 tickets) indicating elevated operational stress. This urgent ticket rate is <strong>2.7x higher than the previous Feb period</strong> (9.1%), suggesting increasing platform instability or escalating user issues. Notably, Ron Pineda handles 10 of the 16 urgent tickets (62.5%), creating an unsustainable concentration of critical work on a single agent with already severe backlog challenges. Low priority (13.8%) and high priority (6.2%) tickets remain manageable but require monitoring.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="chart-section">
+            <h2>Agent Workload Analysis</h2>
+            <div class="chart-container">
+                <div class="chart-title">Agent Ticket Distribution</div>
+                <div class="chart-canvas">
+                    <canvas id="agentChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    While volume distribution appears reasonably balanced—<strong>Ron Pineda</strong> (34.7%, 25 tickets), <strong>Candice Brown</strong> (27.8%, 20 tickets), and <strong>Bola Kuye</strong> (27.8%, 20 tickets)—the <span class="chart-highlight">critical performance gap</span> lies in closure rates, not volume assignment. Ron's <strong>88% open rate</strong> (22 of 25 unclosed) versus Candice's <strong>45% open rate</strong> (9 of 20 unclosed) reveals a 2x performance disparity that volume metrics alone mask. Additionally, <strong>7 unassigned tickets</strong> (9.7%) require immediate triage and assignment. The team needs workload rebalancing based on closure capacity, not just ticket count.
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="chart-section">
+            <h2>Issue Category Analysis</h2>
+            <div class="chart-container">
+                <div class="chart-title">Ticket Distribution by Issue Type</div>
+                <div class="chart-canvas">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    <strong>User Management (UMAC)</strong> leads at <span class="chart-highlight">33.8%</span> (22 tickets), including access requests, role updates, and user provisioning tasks. <strong>Terminations</strong> account for 23.1% (15 tickets), while <strong>EHR/Athena issues</strong> represent 21.5% (14 tickets)—a concerning increase from the 6.6% rate in the previous Feb period, suggesting potential platform stability degradation. Application Issues (12.3%, 8 tickets) and Other/Miscellaneous (9.2%, 6 tickets) round out the distribution. The elevated EHR issue rate requires investigation to identify root causes.
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>Open Ticket Backlog Analysis</h2>
+            <div class="chart-container">
+                <div class="chart-title">Open Tickets by Agent</div>
+                <div class="chart-canvas">
+                    <canvas id="resolutionChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    <strong>Critical Backlog Distribution:</strong> The team carries <span class="chart-highlight">43 open tickets</span> across all agents, with Ron Pineda accounting for <strong>22 tickets (51% of backlog)</strong>, Bola Kuye with 12 tickets (28%), and Candice Brown with 9 tickets (21%). Ron's backlog includes multiple tickets dating back to <strong>July-August 2025</strong> (6-8 months old), indicating systemic closure issues beyond current period performance. The <strong>7 unassigned tickets</strong> add additional risk to the backlog. Immediate intervention required to prevent further accumulation and service quality deterioration.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Key Insights -->
+    <section id="insights">
+        <h1>4. Key Insights & Trends</h1>
+
+        <div class="insight-grid">
+            <div class="insight-card">
+                <div class="insight-number">01</div>
+                <div class="insight-title">Ron Pineda Backlog Crisis</div>
+                <div class="insight-content">
+                    88% open rate (22 of 25 tickets) with multiple tickets dating back to July-August 2025. Represents 51% of team's entire backlog and requires immediate managerial intervention.
+                </div>
+                <span class="insight-tag">CRITICAL</span>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-number">02</div>
+                <div class="insight-title">SLA Notification Crisis</div>
+                <div class="insight-content">
+                    Ron accounts for 76.5% of all SLA notifications (13 of 17), with 2 tickets escalating to critical 2nd urgent warnings. This is 13x higher than Candice (1 notification) and indicates systematic SLA management failures.
+                </div>
+                <span class="insight-tag">CRITICAL</span>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-number">03</div>
+                <div class="insight-title">Performance Disparity</div>
+                <div class="insight-content">
+                    Candice Brown demonstrates 45% open rate (best-in-team), while Ron's 88% open rate is nearly 2x the team average of 66%. This 43-percentage-point gap indicates coaching or resource allocation issues.
+                </div>
+                <span class="insight-tag">Workload Imbalance</span>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-number">04</div>
+                <div class="insight-title">EHR Issue Rate Increase</div>
+                <div class="insight-content">
+                    EHR/Athena issues jumped from 6.6% (Feb period) to 21.5% (current period), a 3.3x increase suggesting potential platform stability degradation requiring engineering investigation.
+                </div>
+                <span class="insight-tag">System Health</span>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-number">05</div>
+                <div class="insight-title">Below-Target Resolution Rate</div>
+                <div class="insight-content">
+                    Only 58.3% of assigned tickets resolved (vs 78.5% in Feb period), a 20-percentage-point decline. Industry benchmarks range from 75-85%, indicating significant operational underperformance.
+                </div>
+                <span class="insight-tag">Performance Gap</span>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-number">06</div>
+                <div class="insight-title">Unassigned Ticket Backlog</div>
+                <div class="insight-content">
+                    7 unassigned tickets (9.7% of volume) await triage and assignment. These represent additional hidden backlog beyond the 43 open assigned tickets.
+                </div>
+                <span class="insight-tag">Process Issue</span>
+            </div>
+        </div>
+
+        <h2>Performance Trends & Projections</h2>
+        <p>Based on the 7-day reporting period (Mar 9-15, 2026) and comparison to the prior Feb 16-Mar 1, 2026 period:</p>
+        <ul>
+            <li><strong>Resolution Rate Decline:</strong> Dropped from 78.5% (Feb) to 58.3% (Mar), a -20.2 percentage point deterioration</li>
+            <li><strong>Urgent Ticket Rate Increase:</strong> Climbed from 9.1% (Feb) to 24.6% (Mar), a +15.5 percentage point surge indicating operational stress</li>
+            <li><strong>EHR Issue Rate Surge:</strong> Jumped from 6.6% (Feb) to 21.5% (Mar), a 3.3x increase requiring platform health investigation</li>
+            <li><strong>Historical Backlog:</strong> Ron's oldest open ticket dates to July 2025 (8 months old), indicating chronic closure issues predating current reporting period</li>
+            <li><strong>Projected Monthly Volume:</strong> Current 7-day period (72 tickets) → ~310 tickets/month if sustained, requiring team capacity assessment</li>
+        </ul>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Recommendations -->
+    <section id="recommendations">
+        <h1>5. Strategic Recommendations</h1>
+
+        <div class="recommendation-section">
+            <div class="recommendation-category">
+                <div class="category-title">
+                    CRITICAL - Immediate Actions
+                    <span class="category-badge">0-7 Days</span>
+                </div>
+                <ul class="recommendation-list">
+                    <li><strong>Emergency intervention for Ron Pineda's backlog</strong>: Conduct immediate 1:1 managerial review to identify blockers. Reassign 10-15 oldest tickets to Candice and Bola to reduce critical load. Target: reduce Ron's open rate from 88% to <60% within 7 days.</li>
+                    <li><strong>Redistribute urgent ticket assignment</strong>: Implement routing rules to cap Ron's urgent ticket allocation at 30% of team total (vs current 62.5%). Route excess urgent tickets to Candice who demonstrates best closure performance.</li>
+                    <li><strong>Triage and assign 7 unassigned tickets</strong> immediately to prevent further backlog accumulation. Assign based on current open rates (prioritize Candice).</li>
+                    <li><strong>Conduct root cause analysis on 6-8 month old tickets</strong>: Review Ron's tickets dating to July-August 2025 to identify systemic blockers (customer unresponsive, missing info, technical blockers) and either close or escalate.</li>
+                </ul>
+            </div>
+
+            <div class="recommendation-category">
+                <div class="category-title">
+                    Short-Term Actions
+                    <span class="category-badge">7-30 Days</span>
+                </div>
+                <ul class="recommendation-list">
+                    <li><strong>Investigate EHR/Athena issue surge</strong>: 3.3x increase (6.6% → 21.5%) requires engineering investigation. Schedule incident review with platform team to identify root causes and prevent further escalation.</li>
+                    <li><strong>Implement weekly backlog review meetings</strong>: Establish mandatory team standup to review all tickets >30 days old. Target: reduce average ticket age from current backlog levels to <14 days.</li>
+                    <li><strong>Develop closure process documentation</strong>: Document best practices from Candice Brown (45% open rate) and create coaching plan for Ron and Bola to improve closure efficiency.</li>
+                    <li><strong>Create automated reminders</strong> for tickets in pending/hold status >7 days to prevent silent backlog accumulation.</li>
+                    <li><strong>Implement SLA notification monitoring dashboard</strong>: Track SLA notifications by agent in real-time. Set alert thresholds (e.g., >3 notifications/week per agent) to enable early intervention. Target: reduce Ron's SLA notifications from 13/week to <3/week (team average).</li>
+                </ul>
+            </div>
+
+            <div class="recommendation-category">
+                <div class="category-title">
+                    Long-Term Strategic Actions
+                    <span class="category-badge">30-90 Days</span>
+                </div>
+                <ul class="recommendation-list">
+                    <li><strong>Capacity assessment and hiring evaluation</strong>: Current ~310 tickets/month projection may exceed 3-agent capacity. Evaluate whether team needs 4th agent or process efficiency improvements can close the gap.</li>
+                    <li><strong>Implement UMAC self-service portal</strong>: 33.8% of tickets are user management related. Self-service access requests could reduce volume by 30-40% (~22 tickets/month).</li>
+                    <li><strong>Develop agent performance dashboards</strong>: Real-time visibility into open rates, ticket age, and closure velocity to enable proactive management intervention before crises develop.</li>
+                    <li><strong>Create SLA tracking for open tickets</strong>: Define maximum age thresholds (e.g., Normal: 30 days, Urgent: 7 days) and implement escalation workflows for violations.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Expected Impact</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Recommendation</th>
+                    <th>Target Metric</th>
+                    <th>Expected Improvement</th>
+                    <th>Timeline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #fee2e2;">
+                    <td><strong>Ron backlog reassignment</strong></td>
+                    <td>Ron's open rate</td>
+                    <td>88% → <60% (-28 pts)</td>
+                    <td>7 days</td>
+                </tr>
+                <tr style="background: #fef3c7;">
+                    <td><strong>Urgent ticket redistribution</strong></td>
+                    <td>Ron's urgent load</td>
+                    <td>62.5% → 30% (-32 pts)</td>
+                    <td>14 days</td>
+                </tr>
+                <tr>
+                    <td>EHR issue root cause fix</td>
+                    <td>EHR issue rate</td>
+                    <td>21.5% → <10% (-11 pts)</td>
+                    <td>30 days</td>
+                </tr>
+                <tr>
+                    <td>Weekly backlog reviews</td>
+                    <td>Team resolution rate</td>
+                    <td>58.3% → 75% (+16.7 pts)</td>
+                    <td>30 days</td>
+                </tr>
+                <tr style="background: #fef3c7;">
+                    <td><strong>SLA notification monitoring</strong></td>
+                    <td>Ron's SLA notifications</td>
+                    <td>13/week → <3/week (-77%)</td>
+                    <td>14 days</td>
+                </tr>
+                <tr>
+                    <td>UMAC self-service portal</td>
+                    <td>Monthly volume reduction</td>
+                    <td>-30% (~22 tickets/month)</td>
+                    <td>90 days</td>
+                </tr>
+                <tr>
+                    <td>Historical backlog cleanup</td>
+                    <td>Total open tickets</td>
+                    <td>43 → <20 (-23 tickets)</td>
+                    <td>30 days</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Appendix -->
+    <section id="appendix">
+        <h1>6. Appendix: Methodology & Data Sources</h1>
+
+        <h2>Data Collection</h2>
+        <ul>
+            <li><strong>Source:</strong> Zendesk MCP Integration</li>
+            <li><strong>Query:</strong> <code>created>2026-03-08 created<2026-03-16 type:ticket</code></li>
+            <li><strong>Total Records:</strong> 72 tickets (65 assigned + 7 unassigned)</li>
+            <li><strong>Date Range:</strong> March 9, 2026 - March 15, 2026 (7 days)</li>
+            <li><strong>Collection Date:</strong> March 16, 2026</li>
+        </ul>
+
+        <h2>Analysis Methodology</h2>
+        <ul>
+            <li><strong>Resolution Rate Calculation:</strong> (Solved + Closed tickets) / Total assigned tickets × 100 = (24 + 18) / 65 = 58.3%</li>
+            <li><strong>Open Rate Calculation:</strong> (Pending + Hold tickets) / Total assigned tickets × 100 = (15 + 8) / 65 = 35.4%</li>
+            <li><strong>Historical Open Tickets:</strong> Retrieved using query <code>assignee:[AGENT_ID] -status:solved -status:closed</code> without date restrictions to capture all unclosed tickets across entire history</li>
+            <li><strong>Issue Categorization:</strong> Manual classification based on ticket subject, tags, and content analysis across 5 primary categories: UMAC, Terminations, EHR/Athena, Application Issues, Other</li>
+            <li><strong>Priority Distribution:</strong> Based on Zendesk priority field values (urgent, high, normal, low)</li>
+        </ul>
+
+        <h2>Key Definitions</h2>
+        <ul>
+            <li><strong>Resolved Tickets:</strong> Tickets with status "solved" or "closed"</li>
+            <li><strong>Open Tickets:</strong> Tickets with status "pending" or "hold" (including all historical unclosed tickets)</li>
+            <li><strong>Open Rate:</strong> Percentage of agent's assigned tickets that remain unclosed = Open Tickets / Total Assigned Tickets × 100</li>
+            <li><strong>Backlog:</strong> Total count of open tickets across all agents and time periods, representing accumulated unclosed work</li>
+            <li><strong>Historical Tickets:</strong> Open tickets created before the current reporting period but still unclosed, indicating chronic backlog issues</li>
+            <li><strong>UMAC:</strong> User Management and Admin Console—tickets related to access, permissions, role updates, and user lifecycle management</li>
+            <li><strong>EHR/Athena:</strong> Electronic Health Record and Athena integration—tickets related to clinical application functionality, connectivity, and integration issues</li>
+            <li><strong>Terminations:</strong> User account deactivation and offboarding requests</li>
+            <li><strong>Application Issues:</strong> Software bugs, performance problems, and technical defects in platform functionality</li>
+        </ul>
+
+        <h2>Agent Identification</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Agent Name</th>
+                    <th>Zendesk ID</th>
+                    <th>Assigned Tickets</th>
+                    <th>Open Tickets</th>
+                    <th>Open Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bola Kuye</td>
+                    <td>39948397141915</td>
+                    <td>20 (27.8%)</td>
+                    <td>12</td>
+                    <td>60.0%</td>
+                </tr>
+                <tr>
+                    <td>Candice Brown</td>
+                    <td>21761242009371</td>
+                    <td>20 (27.8%)</td>
+                    <td>9</td>
+                    <td>45.0%</td>
+                </tr>
+                <tr>
+                    <td>Ron Pineda</td>
+                    <td>21761363093147</td>
+                    <td>25 (34.7%)</td>
+                    <td>22</td>
+                    <td>88.0%</td>
+                </tr>
+                <tr style="background: #f0f9ff; font-weight: 600;">
+                    <td>Team Total</td>
+                    <td>—</td>
+                    <td>65 (90.3%)</td>
+                    <td>43</td>
+                    <td>66.2%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Limitations & Considerations</h2>
+        <ul>
+            <li>7-day reporting period represents a snapshot and may not fully capture long-term performance trends</li>
+            <li>Open ticket counts include historical backlog from months prior to the reporting period, providing full visibility into accumulated unclosed work</li>
+            <li>Resolution rate (58.3%) calculated only for assigned tickets (65); unassigned tickets (7) excluded from rate calculation</li>
+            <li>Ron Pineda's historical backlog dating to July-August 2025 indicates chronic issues predating the current reporting period</li>
+            <li>Issue categorization performed through manual analysis of ticket subjects and tags; some classification ambiguity may exist for complex multi-issue tickets</li>
+            <li>Performance comparison to Feb 16-Mar 1, 2026 period may be affected by different reporting durations (7 days vs 14 days)</li>
+        </ul>
+    </section>
+
+    <div class="footer-note">
+        <p><strong>Product Success Team Metrics</strong> | March 9 - March 15, 2026</p>
+        <p>Report Generated: March 15, 2026 | Prepared by: Anthony Gil | Product Success Division</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">This document contains confidential business information. Distribution limited to authorized personnel only.</p>
+    </div>
+
+    <script>
+        // Chart.js configuration
+        Chart.defaults.color = '#4a5568';
+        Chart.defaults.borderColor = '#e2e8f0';
+        Chart.defaults.font.family = "'Georgia', 'Times New Roman', serif";
+        Chart.defaults.font.size = 12;
+
+        const chartColors = {
+            teal: '#06b6d4',
+            amber: '#f59e0b',
+            coral: '#f87171',
+            emerald: '#10b981',
+            purple: '#8b5cf6',
+            blue: '#3b82f6',
+            pink: '#ec4899',
+            cyan: '#22d3ee',
+        };
+
+        // Status Distribution Chart
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Solved (36.9%)', 'Closed (27.7%)', 'Pending (23.1%)', 'Hold (12.3%)'],
+                datasets: [{
+                    data: [24, 18, 15, 8],
+                    backgroundColor: [chartColors.teal, chartColors.emerald, chartColors.amber, chartColors.coral],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { padding: 15, font: { size: 13 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                        padding: 12,
+                    }
+                }
+            }
+        });
+
+        // Priority Distribution Chart
+        new Chart(document.getElementById('priorityChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Normal', 'Urgent', 'Low', 'High'],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [36, 16, 9, 4],
+                    backgroundColor: [chartColors.teal, chartColors.coral, chartColors.blue, chartColors.amber],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+
+        // Agent Workload Chart
+        new Chart(document.getElementById('agentChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Ron Pineda (34.7%)', 'Bola Kuye (27.8%)', 'Candice Brown (27.8%)', 'Unassigned (9.7%)'],
+                datasets: [{
+                    data: [25, 20, 20, 7],
+                    backgroundColor: [chartColors.coral, chartColors.cyan, chartColors.purple, '#94a3b8'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { padding: 15, font: { size: 13 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                    }
+                }
+            }
+        });
+
+
+        // Issue Categories Chart
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'bar',
+            data: {
+                labels: ['User Management (UMAC)', 'Terminations', 'EHR/Athena Issues', 'Application Issues', 'Other/Misc'],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [22, 15, 14, 8, 6],
+                    backgroundColor: [chartColors.teal, chartColors.purple, chartColors.amber, chartColors.coral, chartColors.blue],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                    }
+                },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Open Ticket Backlog Chart
+        new Chart(document.getElementById('resolutionChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Ron Pineda', 'Bola Kuye', 'Candice Brown', 'Unassigned'],
+                datasets: [
+                    {
+                        label: 'Open Tickets',
+                        data: [22, 12, 9, 7],
+                        backgroundColor: [chartColors.coral, chartColors.cyan, chartColors.purple, '#94a3b8'],
+                        borderWidth: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed.y + ' tickets';
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9' },
+                        title: {
+                            display: true,
+                            text: 'Open Tickets',
+                            font: { size: 13, weight: 600 }
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        title: {
+                            display: true,
+                            text: 'Agent',
+                            font: { size: 13, weight: 600 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

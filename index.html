@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Success Team Reports | Mar 9-15, 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .report-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .report-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #06b6d4;
+        }
+
+        .report-card.team {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #f0fdfa 0%, #cffafe 100%);
+            border-color: #06b6d4;
+        }
+
+        .report-card.bola {
+            border-color: #22d3ee;
+            background: linear-gradient(135deg, #f0fdfa 0%, #cffafe 100%);
+        }
+
+        .report-card.candice {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 100%);
+        }
+
+        .report-card.ron {
+            border-color: #f87171;
+            background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
+        }
+
+        .report-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .report-meta {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .report-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #06b6d4;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 0.25rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #06b6d4;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .badge-good {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Success Team Reports</h1>
+        <div class="subtitle">
+            <strong>Reporting Period:</strong> March 9 - March 15, 2026<br>
+            <strong>Generated:</strong> March 16, 2026
+        </div>
+
+        <div class="report-grid">
+            <!-- Team Metrics Report -->
+            <div class="report-card team">
+                <div class="report-title">📊 Team Metrics Overview</div>
+                <div class="report-meta">Comprehensive team performance analysis and strategic recommendations</div>
+                <div class="report-stats">
+                    <div class="stat">
+                        <div class="stat-value">72</div>
+                        <div class="stat-label">Total Tickets</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">58.3%</div>
+                        <div class="stat-label">Resolution Rate</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">43</div>
+                        <div class="stat-label">Open Tickets</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">17</div>
+                        <div class="stat-label">SLA Notifications</div>
+                    </div>
+                </div>
+                <a href="product_success_team_metrics_mar9-mar15_2026.html" class="btn">View Team Report</a>
+            </div>
+
+            <!-- Bola Kuye Report -->
+            <div class="report-card bola">
+                <div class="report-title">
+                    Bola Kuye
+                    <span class="badge badge-warning">60% Open</span>
+                </div>
+                <div class="report-meta">Individual performance analysis and metrics</div>
+                <div class="report-stats">
+                    <div class="stat">
+                        <div class="stat-value">20</div>
+                        <div class="stat-label">Tickets</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Open</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">27.8%</div>
+                        <div class="stat-label">Team Share</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">SLA Alerts</div>
+                    </div>
+                </div>
+                <a href="agent_report_bola_kuye_mar9-mar15_2026.html" class="btn">View Report</a>
+            </div>
+
+            <!-- Candice Brown Report -->
+            <div class="report-card candice">
+                <div class="report-title">
+                    Candice Brown
+                    <span class="badge badge-good">45% Open</span>
+                </div>
+                <div class="report-meta">Individual performance analysis and metrics</div>
+                <div class="report-stats">
+                    <div class="stat">
+                        <div class="stat-value">20</div>
+                        <div class="stat-label">Tickets</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">9</div>
+                        <div class="stat-label">Open</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">27.8%</div>
+                        <div class="stat-label">Team Share</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">SLA Alerts</div>
+                    </div>
+                </div>
+                <a href="agent_report_candice_brown_mar9-mar15_2026.html" class="btn">View Report</a>
+            </div>
+
+            <!-- Ron Pineda Report -->
+            <div class="report-card ron">
+                <div class="report-title">
+                    Ron Pineda
+                    <span class="badge badge-critical">88% Open</span>
+                </div>
+                <div class="report-meta">Individual performance analysis and metrics</div>
+                <div class="report-stats">
+                    <div class="stat">
+                        <div class="stat-value">25</div>
+                        <div class="stat-label">Tickets</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">22</div>
+                        <div class="stat-label">Open</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">34.7%</div>
+                        <div class="stat-label">Team Share</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">13</div>
+                        <div class="stat-label">SLA Alerts</div>
+                    </div>
+                </div>
+                <a href="agent_report_ron_pineda_mar9-mar15_2026.html" class="btn">View Report</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>Product Success Division</strong><br>
+            Prepared by: Anthony Gil | Internal Use - Business Confidential
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Performance Report - Bola Kuye | Mar 9 - Mar 15, 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @page {
+            margin: 1in;
+            size: letter;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #2d3748;
+            background: white;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+        }
+
+        .cover-page {
+            text-align: center;
+            padding: 3in 0 2in;
+            page-break-after: always;
+            border-bottom: 3px solid #22d3ee;
+        }
+
+        .cover-page h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .cover-page h2 {
+            font-size: 1.75rem;
+            margin-bottom: 3rem;
+            color: #4a5568;
+            font-weight: normal;
+        }
+
+        .cover-page .metadata {
+            font-size: 1.05rem;
+            color: #718096;
+            line-height: 2.2;
+        }
+
+        .cover-page .metadata p {
+            margin: 0.5rem 0;
+        }
+
+        .cover-page .classification {
+            margin-top: 3rem;
+            padding: 1rem 2rem;
+            background: #cffafe;
+            border: 2px solid #22d3ee;
+            color: #164e63;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 2rem 0 1.5rem;
+            color: #1a202c;
+            border-bottom: 3px solid #22d3ee;
+            padding-bottom: 0.75rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: #1a202c;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #cffafe 100%);
+            border: 2px solid #22d3ee;
+            border-radius: 8px;
+            padding: 1.75rem;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .metric-box .value {
+            display: block;
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: #0e7490;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-box .label {
+            color: #164e63;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .metric-box .status {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-good { background: #d1fae5; color: #065f46; }
+        .status-warning { background: #fef3c7; color: #92400e; }
+        .status-info { background: #dbeafe; color: #1e40af; }
+
+        .chart-section {
+            margin: 2.5rem 0;
+            page-break-inside: avoid;
+        }
+
+        .chart-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .chart-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .chart-canvas {
+            position: relative;
+            height: 350px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-description {
+            padding: 1.25rem;
+            background: white;
+            border-left: 4px solid #22d3ee;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #4a5568;
+        }
+
+        .chart-description strong {
+            color: #1a202c;
+            font-weight: 600;
+        }
+
+        .chart-highlight {
+            background: #cffafe;
+            padding: 2px 8px;
+            border-radius: 3px;
+            color: #0e7490;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            page-break-inside: avoid;
+        }
+
+        thead {
+            background: #f0fdfa;
+            border-bottom: 2px solid #22d3ee;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem 0.75rem;
+            font-weight: 600;
+            border: 1px solid #cbd5e0;
+            color: #1a202c;
+        }
+
+        td {
+            padding: 0.85rem 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.65rem;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .footer-note {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e2e8f0;
+            font-size: 0.875rem;
+            color: #718096;
+            text-align: center;
+        }
+
+        .alert-box {
+            background: #f0fdfa;
+            border-left: 5px solid #22d3ee;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            page-break-inside: avoid;
+        }
+
+        .alert-box p {
+            margin-bottom: 1rem;
+        }
+
+        .alert-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .metric-grid {
+                page-break-inside: avoid;
+            }
+
+            .chart-container {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: #2d3748;
+                text-decoration: none;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <h1>Agent Performance Report</h1>
+        <h2>Bola Kuye</h2>
+        <div class="metadata">
+            <p><strong>Report Period:</strong> March 9 - March 15, 2026</p>
+            <p><strong>Report Date:</strong> March 15, 2026</p>
+            <p><strong>Prepared By:</strong> Anthony Gil</p>
+            <p><strong>Department:</strong> Product Success</p>
+            <p><strong>Agent ID:</strong> 39948397141915</p>
+        </div>
+        <div class="classification">
+            INDIVIDUAL PERFORMANCE - CONFIDENTIAL
+        </div>
+    </div>
+
+    <!-- Performance Summary -->
+    <section id="performance-summary">
+        <h1>Performance Summary</h1>
+
+        <div class="alert-box">
+            <p><strong>Agent:</strong> Bola Kuye demonstrates <strong>consistent performance</strong> with balanced workload distribution and effective ticket resolution capabilities during the March 9-16, 2026 reporting period.</p>
+        </div>
+
+        <h2>Key Performance Indicators</h2>
+        <div class="metric-grid">
+            <div class="metric-box">
+                <span class="value">20</span>
+                <div class="label">Total Tickets</div>
+                <span class="status status-info">Mar 9-15</span>
+            </div>
+            <div class="metric-box">
+                <span class="value">27.8%</span>
+                <div class="label">Team Share</div>
+                <span class="status status-good">Balanced</span>
+            </div>
+            <div class="metric-box">
+                <span class="value">12</span>
+                <div class="label">Open Tickets</div>
+                <span class="status status-info">All Time</span>
+            </div>
+            <div class="metric-box">
+                <span class="value">60.0%</span>
+                <div class="label">Open Rate</div>
+                <span class="status status-warning">Elevated</span>
+            </div>
+        </div>
+
+        <h2>SLA Notifications (Mar 9-15, 2026)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Notification Type</th>
+                    <th>Count</th>
+                    <th>Ticket IDs</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1st Normal SLA</strong> (17 hrs remaining)</td>
+                    <td>2</td>
+                    <td>4091, 4251</td>
+                    <td style="background: #fef3c7; color: #92400e; font-weight: 600;">Moderate</td>
+                </tr>
+                <tr>
+                    <td><strong>1st Urgent SLA</strong> (5 hrs remaining)</td>
+                    <td>1</td>
+                    <td>4139</td>
+                    <td style="background: #fef3c7; color: #92400e; font-weight: 600;">Warning</td>
+                </tr>
+                <tr>
+                    <td><strong>2nd Urgent SLA</strong> (3 hrs remaining)</td>
+                    <td>0</td>
+                    <td>—</td>
+                    <td style="background: #d1fae5; color: #065f46; font-weight: 600;">✓ None</td>
+                </tr>
+                <tr>
+                    <td><strong>3rd Urgent SLA</strong> (final warning)</td>
+                    <td>0</td>
+                    <td>—</td>
+                    <td style="background: #d1fae5; color: #065f46; font-weight: 600;">✓ None</td>
+                </tr>
+                <tr style="background: #f0f9ff; font-weight: 600;">
+                    <td><strong>Total SLA Notifications</strong></td>
+                    <td>3</td>
+                    <td colspan="2">3 tickets triggered SLA notifications during reporting period</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #4a5568;"><strong>Note:</strong> SLA notifications are automated alerts from the #zendesk-sla-notifications Slack channel. Each notification level indicates remaining time before SLA breach. Total of 3 SLA notifications indicates moderate proactive monitoring with minimal escalation to critical thresholds.</p>
+
+        <h2>Workload Context</h2>
+        <p>During the reporting period (March 9-15, 2026), Bola handled <strong>20 tickets (27.8% of team volume)</strong>, demonstrating balanced workload distribution across the 3-person support team. This represents equal distribution with Candice and slightly lower than Ron's workload.</p>
+
+        <ul>
+            <li><strong>Team Position:</strong> Tied for 2nd of 3 agents by volume (20 vs 20 vs 25 tickets)</li>
+            <li><strong>Variance from Mean:</strong> -7.7% below team average of 21.7 tickets</li>
+            <li><strong>Team Total:</strong> 72 total tickets (65 assigned + 7 unassigned)</li>
+            <li><strong>Open Ticket Load:</strong> 12 open tickets (60.0% open rate) - elevated backlog requiring attention</li>
+        </ul>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Detailed Metrics -->
+    <section id="detailed-metrics">
+        <h1>Detailed Performance Metrics</h1>
+
+        <h2>Ticket Status Distribution</h2>
+        <div class="chart-section">
+            <div class="chart-container">
+                <div class="chart-title">Status Breakdown - Bola Kuye</div>
+                <div class="chart-canvas">
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    Status distribution shows <strong>strong resolution performance</strong> with 40% solved and 25% closed (65% total resolution). The 20% pending and 15% on hold reflect tickets awaiting external responses or engineering escalation. This demonstrates solid weekly closure velocity.
+                </div>
+            </div>
+        </div>
+
+        <h2>Priority Level Analysis</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Priority</th>
+                    <th>Ticket Count</th>
+                    <th>Percentage</th>
+                    <th>Team Comparison</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Normal</strong></td>
+                    <td>13</td>
+                    <td>65.0%</td>
+                    <td>Aligned with team average</td>
+                </tr>
+                <tr>
+                    <td><strong>Urgent</strong></td>
+                    <td>4</td>
+                    <td>20.0%</td>
+                    <td>Below team (Ron: 40%, Candice: 10%)</td>
+                </tr>
+                <tr>
+                    <td><strong>Low</strong></td>
+                    <td>2</td>
+                    <td>10.0%</td>
+                    <td>Aligned with team average</td>
+                </tr>
+                <tr>
+                    <td><strong>High</strong></td>
+                    <td>1</td>
+                    <td>5.0%</td>
+                    <td>Below team (Candice: 15%)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Issue Category Distribution</h2>
+        <div class="chart-section">
+            <div class="chart-container">
+                <div class="chart-title">Issue Types - Bola Kuye</div>
+                <div class="chart-canvas">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-description">
+                    Issue category distribution shows <span class="chart-highlight">user management (UMAC)</span> as the primary category (30%), followed by terminations (25%), and EHR/Athena integration work (20%). Application issues and other miscellaneous tickets round out the workload.</div>
+            </div>
+        </div>
+
+        <h2>Open Tickets Requiring Action</h2>
+        <p>The following tickets are currently <strong>open</strong> (including statuses: pending, hold, open, in discovery, under review, waiting on user, escalated to eng, in backlog, requested info, escalated to config team) and require follow-up or resolution. <strong>Note: This includes ALL open tickets assigned to this agent, not limited to the reporting period.</strong></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 7%;">Ticket ID</th>
+                    <th style="width: 25%;">Subject</th>
+                    <th style="width: 8%;">Status</th>
+                    <th style="width: 8%;">Priority</th>
+                    <th style="width: 10%;">Created</th>
+                    <th style="width: 30%;">Last Comment</th>
+                    <th style="width: 12%;">Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#3901</strong></td>
+                    <td>Clover Health Interface is Authorized!</td>
+                    <td>On Hold</td>
+                    <td style="color: #ea580c; font-weight: 600;">High</td>
+                    <td>Feb 9</td>
+                    <td>Tagging this as an incident ticket of #3874</td>
+                    <td>Mar 9</td>
+                </tr>
+                <tr>
+                    <td><strong>#3874</strong></td>
+                    <td>MDP Marketplace Authorize and Consent form submitted</td>
+                    <td>Under Review</td>
+                    <td style="color: #ea580c; font-weight: 600;">High</td>
+                    <td>Feb 4</td>
+                    <td>Checked the appointment mappings and confirmed the mapping are set up correctly</td>
+                    <td>Mar 12</td>
+                </tr>
+                <tr>
+                    <td><strong>#3934</strong></td>
+                    <td>Reinstate visits that were deleted in error: Ronald M Frank MD PA</td>
+                    <td>On Hold</td>
+                    <td>Low</td>
+                    <td>Feb 12</td>
+                    <td>Good morning Alexis Reyes. I will discuss this with the team to make sure moving visits older than 2 years to completed status is ok</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4132</strong></td>
+                    <td>Example of Aetna → UHC Encounter Sync Issue</td>
+                    <td>Escalated to Eng</td>
+                    <td style="color: #dc2626; font-weight: 600;">Urgent</td>
+                    <td>Mar 2</td>
+                    <td>Reached out to Mohammed via slack to see if there's an updated on this investigation. Most recent information is that they found 550 duplicate TIC patients</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4182</strong></td>
+                    <td>Delete Visit in CA - Submitted in Error</td>
+                    <td>Under Review</td>
+                    <td>Low</td>
+                    <td>Mar 5</td>
+                    <td>Katie Koppinger I reached out to CW Lam and Harrison to advise on this issue</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4216</strong></td>
+                    <td>CA: Error when trying to close and sign visit</td>
+                    <td>Waiting on User</td>
+                    <td style="color: #dc2626; font-weight: 600;">Urgent</td>
+                    <td>Mar 9</td>
+                    <td>Good morning Sherly, Can you tell me if your still unable to close and sign the CA visit? Please also let me know the name of the patient and DOS if this is still happening</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4246</strong></td>
+                    <td>Re: Counterpart Assistant Access "Jon Hu"</td>
+                    <td>Requested Info</td>
+                    <td>Normal</td>
+                    <td>Mar 12</td>
+                    <td>Good morning Sanjay, Please confirm the updates to the IT ticket. Once confirmed I will update Jon's access in CPH and CA</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4266</strong></td>
+                    <td>MDP Marketplace Authorize and Consent form submitted</td>
+                    <td>Under Review</td>
+                    <td style="color: #dc2626; font-weight: 600;">Urgent</td>
+                    <td>Mar 12</td>
+                    <td>Roster for M3 medical practice users</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4218</strong></td>
+                    <td>Incorrect Discharge Data in CareConnect in CA</td>
+                    <td>On Hold</td>
+                    <td style="color: #ea580c; font-weight: 600;">High</td>
+                    <td>Mar 9</td>
+                    <td>Thanks so much! (from Katie Koppinger)</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4273</strong></td>
+                    <td>Clover Assistant Access Request for Bethany Fefelov</td>
+                    <td>Requested Info</td>
+                    <td>Normal</td>
+                    <td>Mar 13</td>
+                    <td>Good afternoon all, I'm working on this access request ticket. When you say chart viewer Bethany, are you referring to "clinical data viewer"?</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4275</strong></td>
+                    <td>CA Demo missing data: Megan Meade</td>
+                    <td>In Discovery</td>
+                    <td>Normal</td>
+                    <td>Mar 13</td>
+                    <td>On your browser (Chrome)</td>
+                    <td>Mar 13</td>
+                </tr>
+                <tr>
+                    <td><strong>#4091</strong></td>
+                    <td>Clover Assistant Access for "Wojciech Achtelik"</td>
+                    <td>Open</td>
+                    <td>Normal</td>
+                    <td>Feb 27</td>
+                    <td>Thanks everyone (from Montrey)</td>
+                    <td>Mar 14</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Performance Analysis -->
+    <section id="analysis">
+        <h1>Performance Analysis</h1>
+
+        <h2>Strengths</h2>
+        <ul>
+            <li><strong>Balanced Workload:</strong> 27.8% team share (20 tickets) demonstrates equal distribution with Candice</li>
+            <li><strong>Strong Closure Rate:</strong> 65% of weekly tickets closed/solved (13 of 20) vs only 40% open rate in backlog</li>
+            <li><strong>Priority Mix Management:</strong> Handles 20% urgent tickets (4 of 20), balanced between Candice (10%) and Ron (40%)</li>
+            <li><strong>User Communication:</strong> Consistent follow-up visible in ticket comments with professional greetings and status updates</li>
+            <li><strong>Category Diversity:</strong> Balanced ticket type distribution - UMAC (30%), terminations (25%), EHR/Athena (20%)</li>
+        </ul>
+
+        <h2>Key Observations</h2>
+        <ul>
+            <li>Ticket volume (20) tied with Candice at 27.8% team share, 20% below Ron's 25 tickets</li>
+            <li><strong>Closure Performance:</strong> Solved 40% + Closed 25% = 65% resolution rate for weekly tickets</li>
+            <li><strong>Open Rate: 60%</strong> - 12 historical open tickets, but only 7 from current week (35% weekly open rate)</li>
+            <li>Status distribution: 40% Solved, 25% Closed, 20% Pending, 15% On Hold</li>
+            <li>Priority distribution: 65% Normal, 20% Urgent, 10% Low, 5% High - well-balanced across all levels</li>
+            <li>Several tickets awaiting external responses (4 On Hold) or pending info requests (2 Requested Info)</li>
+            <li>12 total open tickets include mix of new (Mar 13) and older tickets (Feb 4), indicating some backlog accumulation</li>
+            <li>Open ticket breakdown: 4 On Hold, 3 Under Review, 2 Requested Info, 1 Escalated to Eng, 1 In Discovery, 1 Open</li>
+        </ul>
+
+        <h2>Recommendations</h2>
+        <ul>
+            <li><strong>Backlog Focus:</strong> 60% total open rate needs attention - prioritize tickets older than 30 days (#3874, #3901, #3934)</li>
+            <li><strong>Daily Follow-up Protocol:</strong> Establish morning routine to check status on all "Requested Info" and "Under Review" tickets</li>
+            <li><strong>Closure Acceleration:</strong> Move 4 "On Hold" tickets to action - many likely waiting unnecessarily</li>
+            <li><strong>Engineering Escalations:</strong> Weekly check-ins on #4132 and other escalated tickets to prevent stalling</li>
+            <li><strong>Knowledge Documentation:</strong> Create quick reference guide for common Athena integration issues</li>
+            <li><strong>Continue Strengths:</strong> Maintain balanced priority handling and strong weekly closure rate (65%)</li>
+        </ul>
+    </section>
+
+    <div class="footer-note">
+        <p><strong>Agent Performance Report - Bola Kuye</strong> | March 9 - March 15, 2026</p>
+        <p>Report Generated: March 15, 2026 | Prepared by: Anthony Gil | Product Success Division</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">This document contains confidential employee performance information. Distribution limited to authorized personnel only.</p>
+    </div>
+
+    <script>
+        // Chart.js configuration
+        Chart.defaults.color = '#4a5568';
+        Chart.defaults.borderColor = '#e2e8f0';
+        Chart.defaults.font.family = "'Georgia', 'Times New Roman', serif";
+        Chart.defaults.font.size = 12;
+
+        const chartColors = {
+            cyan: '#22d3ee',
+            teal: '#06b6d4',
+            amber: '#f59e0b',
+            coral: '#f87171',
+            emerald: '#10b981',
+            purple: '#8b5cf6',
+            blue: '#3b82f6',
+        };
+
+        // Status Distribution Chart (actual data from Mar 9-15, 2026)
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Solved (40.0%)', 'Closed (25.0%)', 'Pending (20.0%)', 'Hold (10.0%)'],
+                datasets: [{
+                    data: [8, 5, 4, 3],
+                    backgroundColor: [chartColors.emerald, chartColors.cyan, chartColors.amber, chartColors.coral],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { padding: 15, font: { size: 13 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                        padding: 12,
+                    }
+                }
+            }
+        });
+
+        // Category Distribution Chart (actual data from Mar 9-15, 2026)
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'bar',
+            data: {
+                labels: ['UMAC', 'Terminations', 'EHR/Athena', 'Application Issues', 'Other'],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [6, 5, 4, 3, 2],
+                    backgroundColor: [chartColors.cyan, chartColors.purple, chartColors.blue, chartColors.coral, chartColors.amber],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1a202c',
+                        bodyColor: '#4a5568',
+                        borderColor: '#e2e8f0',
+                        borderWidth: 2,
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
